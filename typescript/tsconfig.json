@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+        "target": "es6", //chuẩn biên dịch (es5 or es6)
+        "outDir": "js", //thư mục buil file js
+        "watch": true  //auto biên dịch sang js ( tương đương 'tsc app.ts -w')
+    },
+        "exclude": [  //folder k cần biên dịch
+        "mjs"
+    ]
+}
