@@ -1,0 +1,100 @@
+đây là cái store: nó sẽ gồm cái provider bao cái app
+cái này là cấu trúc của nó. ông cứ làm theo nó là đc
+đó
+cái này để chuyển màn hình
+đây là cái ban đầu
+cái store nó sẽ có cái reducer. cái này để xử lý các logic đẩy vô
+cái index reducer để bao gồm tất cả các reducer khác, ví dụ có 10 thằng thì phải khai báo 10 thằng ở đây
+oke cai nay t biet r
+đây là 1 reducer, nhưng trước khi viết reducer thì phải viết action trước
+vì phải gọi đc action từ view thì mới gửi đc vào reducer
+hieeur action là gì k?
+co
+là gì
+la cai thang kieu nhu request gui dispatch di de thay doi du lieuiuh\\
+uh nó gửi action để thằng reducer nó nhận, thằng reducer lại ở trong store, nên thằng reducer sẽ xử lý để trả về thay đổi store
+rooif giowf viết thằng reducer
+thơờng người ta sẽ khai báo 1 cái init state
+cái ví dụ trên trang chủ chỉ là người ta chi cần trả về true false thôi, nên ngơời ta k cần init state
+ok
+
+
+để t viết xong, t giai thích 1 thể
+viết xong reducer rồi, giơ viết view
+oong biết state và props là gì rồi chứ?
+học react biet r
+biết setstate rồi chứ uk
+
+giờ là bước tích howpk redux vao screen
+phải import cái connect này
+thứ 2 là cái ẽport
+nó sẽ gồm 2 hàm này
+cái này là mẫu rồi
+2 cais hamf này đặt tên là gì cũng đc
+nhưng nên đặt như này
+vì nó là đặt chuẩn, người khác nhìn vào là hiểu
+giờ đẩy lên nhá
+
+cái addItem này đơợc lấy từ action, nên phải imort nó vô
+
+cai này là gửi giá trị nhập từ input kia vào reducer qua thằng action
+thằng reducer nó nhận đc dựa theo cái key ADD_ITEM để nó biết đc action nào đang đc gọi
+nó sẽ trả về 1 state mới
+cái ...state kia là lấy tất cả state, còn thằng nào thay đổi thì viết bên canh, như trường hợp này mình muốn thằng todos kia thay đổi thì mình viết lại bên cạnh.
+tại vì sao mình muốn thằng todos thay đổi? vì mình muốn add thêm 1 thằng nữa nào todos
+
+rồi giờ thì test cái
+
+cos can bind no k?
+cái này nó hơi khác react native 1 tý
+react native chỉ cần viết như lúc đầu là chạy đc, còn cái này phải thêm target.value
+vì đây t viết hàm arrow function nên k cần bind, () => đó
+lỗi ở reducer
+có vẻ đc rồi
+giơ lấy dữ liệu từ store ra
+nó lấy dữ liệu từ store ra thì nó lấy ra đc rồi vì nó hiên thị number 1. 2 rồi
+nhưng đoạn thêm vào mảng này hình như bị sai
+items co s nay
+cái items này là chỗ này, nên k sai
+để t đặt khác tên, cho ông hiểu
+
+nó ko đẩy vào mảng
+à nhầm
+conncat là nối mảng, giờ mình phải dùng push chứ k dùng concat vì cái mình nhập vào là text chứ ko phải là mảng
+novẫn méo push đc
+có gì đó sai
+đó, đc rồi
+ở màn hình topic mình cũng lấy được dữ liệu từ redux, tất cả mọi màn hình đều lấy được dữ liêu từ redux
+đó
+nói qua lại từ đầu nhá
+=============================
+Bước 1: ở App thì nó sẽ có cấu trúc như này
+vì t viết app thẳng vào index
+providerbao App, APp sẽ là 1 router, hoặc 1 màn hình. thường là 1 router, vì ông còn chuyển màn hình khác nữa. Giờ ông chưa học nhưng sau này chắc chắn phải học cái router
+cái store này sẽ bao gồm reducer.
+
+bước 2: ông tạo action: cái itemName kia là cái được ông gửi từ view vào action, action sẽ được gửi qua reducer thông qua cái type mà nó nhận đươc, type ở đây là ADD_Item
+thấy chưa? thấy r
+nó dựa vào cái type đó để biết thằng nào đăng gửi, ví dụ t làm thêm thằng nữa là Remove item thì t cung định nghĩa 1 thằng như vậy, kiểu kiểu vậy, đấy là cách nó nhận biết thằng nào đang gửi
+cái reducer này có hàm init state, như example thì nó để là {} nhw nayf, nhưng mình phải để như này, vì mình còn phải khai báo nhiều thành phần, còn example nó chỉ có mỗi thành phần. ví dụ sau này ông còn thêm nhiều thàng khác nữa, kieeur nay, cái này là khi request api phải thêm vô để biết nó đang reuest hay k. và thêm nhiều nữa, nên mình phải khai báo sẵn 1 cái initstate.
+
+bước 3: ở view( screen)
+phải import cái connect vào, viết 2 cái function kia ra, và export như vây
+2 hàm kia ý nghĩa thì biết rồi.
+nhìn cái này:
+hết rồi. còn k hiểu gì k?
+mà ông hiểu props là gì k ấy ( props ko phải của redux nhá)
+kiểu như thằng cha nó truyền cho thằng con
+uh ok, còn thằng kia là lấy từ redux ra nên phải gọi là props
+à thằng state là lấy của react ngay trên kia à
+uh oke hiểu rồi
+:D
+khuyên
+nên commit code này lên github
+code này max basic và là form chuẩn đó
+oke. C
+biết commit k? có biết rồiCảm ơn nhé
+di ngủ
+bye
+
+
