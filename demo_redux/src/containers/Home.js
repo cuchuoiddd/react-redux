@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 // import './App.css';
 // import { Provider } from 'react-redux';
 import { connect } from 'react-redux';
-import { addItem } from '../actions'
+import {  updateItem } from '../actions'
 import TrangChu from '../components/TrangChu';
 
 class Home extends Component {
@@ -34,7 +34,7 @@ class Home extends Component {
 
 
   onNavigateTopic() {
-    this.props.history.push('/topics')
+    this.props.history.push('/add')
   }
 
   render() {
@@ -43,9 +43,7 @@ class Home extends Component {
     // nhwng vieets kiểu này ngắn hơn, vì mình còn thêm đc vài thằng khác vô nữa
     //caí đó có biết nhưng sao lại là state mà thằng dưới là props
     //
-    const { arrayTodo } = this.props // prop này là của redux
-
-    var { abc } = this.props;
+    var { abc } = this.props; // prop này là của redux
     return (
       <div className="App container">
         <header className="App-header">
@@ -110,10 +108,10 @@ const mapStateToProps = state => {
   }
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch,props) {
   //hàm này là đẩy dữ liệu lêm store
   return {
-    onAddItem: (itemName) => dispatch(addItem(itemName))
+    onUpdateItem: (id) => dispatch(updateItem(id))
     // là dispath gửi dữ liêu vào action để nó gửi vào reducer
     //cai person owr dau ra the
     // cais nay đặt tên gì cũng đơợc, kiểu như biến 1 function

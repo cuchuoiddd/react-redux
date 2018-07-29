@@ -1,4 +1,4 @@
-import { ADD_ITEM, DELETE, CREATE } from './types';
+import { ADD_ITEM, UPDATE_ITEM, DELETE_ITEM } from './types';
 
 export function addItem(itemName) {
   return {
@@ -7,6 +7,19 @@ export function addItem(itemName) {
   }
 }
 
+export function updateItem(id) {
+  return {
+    type: UPDATE_ITEM,
+    id
+  }
+}
+
+export function deleteItem(id) {
+  return {
+    type: DELETE_ITEM,
+    id
+  }
+}
 // export function createItem(item) {
 //   let itemtoAdd = {
 //     [Math.floor(Math.random() * 20)]: item

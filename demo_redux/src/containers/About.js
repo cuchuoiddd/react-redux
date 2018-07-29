@@ -1,21 +1,46 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-class About extends Component {
+class Topic extends Component {
+  handleSubmit = (e) => {
+    e.preventDefault();
+  }
   render() {
-    const {arrayTodo}= this.props
     return (
       <div className="Topic">
-        <header className="App-header">
-          <h1 className="App-title">About</h1>
-          <div>{arrayTodo && arrayTodo.map(e => {
-            console.log(arrayTodo);
-            return (
-              <div >{e[1]}</div>
-              
-            )
-          })}</div>
-        </header>
+        <h1 className="text-center">Sửa thành viên</h1>
+        <div className="container">
+          <div className="row">
+            <div className="col-md-4 col-md-offset-4">
+              <div className="panel panel-default">
+                <div className="panel-heading">
+                </div>
+                <div className="panel-body">
+                  <form acceptCharset="UTF-8"  onClick={this.handleSubmit}>
+                    <fieldset>
+                      <div className="form-group">
+                        <input className="form-control" placeholder="id" name="id" type="text" />
+                      </div>
+                      <div className="form-group">
+                        <input className="form-control" placeholder="name" name="name" type="text"  />
+                      </div>
+                      <div className="form-group">
+                        <input className="form-control" placeholder="brithday" name="brithday" type="text"  />
+                      </div>
+                      <div className="form-group">
+                      <input className="form-control" placeholder="sex" name="sex" type="text"  />
+                    </div>
+                    <div className="form-group">
+                      <input className="form-control" placeholder="job" name="job" type="text"  />
+                    </div>
+                      <input className="btn btn-lg btn-success btn-block" type="submit" defaultValue="Login" />
+                    </fieldset>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
@@ -28,10 +53,10 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    //hàm này là đẩy dữ liệu lêm store
+  //hàm này là đẩy dữ liệu lêm store
   return {
     // onAddItem: (person) => dispatch(addItem(person))
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(About)
+export default connect(mapStateToProps, mapDispatchToProps)(Topic)

@@ -39,7 +39,7 @@ class Home extends Component {
   }
 
   onNavigateTopic( ) {
-    this.props.history.push('/topics')
+    this.props.history.push('/add')
   }
 
   render() {

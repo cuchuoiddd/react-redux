@@ -1,5 +1,5 @@
-import _ from 'lodash';
-import { ADD_ITEM, DELETE, CREATE } from '../actions/types';
+// import _ from 'lodash';
+import { ADD_ITEM, UPDATE_ITEM, DELETE_ITEM } from '../actions/types';
 
 const initialState = [
   {
@@ -28,16 +28,37 @@ const initialState = [
   }
 ];
 
+var s4 = ()=>{
+  return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+}
+var randomID = () =>{
+  return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4()  + s4() + s4();
+}
+
+
+
 export default function (state = initialState, action) {
 
   switch (action.type) {
     case ADD_ITEM:
-      return { ...state, todos: [action.itemName, ...state.todos] };
-    // case CREATE:
-    //   return { ...state, ...action.payload };
+    var newItem = {
+      id:randomID(),
+      name:action.itemName.name,
+      brithday:action.itemName.brithday,
+      sex:action.itemName.sex,
+      job:action.itemName.job
+    }
+    state.push(newItem);
+    console.log(action );
+      return [...state];
+      
+     case UPDATE_ITEM:
+     console.log(action);
+     return { ...state};
     // case DELETE:
     //   return _.omit(state, action.payload);
+    case DELETE_ITEM:
+    default: return state;
   }
 
-  return state;
 }
