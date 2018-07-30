@@ -7,10 +7,10 @@ export function addItem(itemName) {
   }
 }
 
-export function updateItem(id) {
+export function updateItem(update) {
   return {
     type: UPDATE_ITEM,
-    id
+    update
   }
 }
 

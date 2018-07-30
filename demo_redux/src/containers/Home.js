@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 // import './App.css';
 // import { Provider } from 'react-redux';
 import { connect } from 'react-redux';
-import {  updateItem } from '../actions'
+import { updateItem } from '../actions'
 import TrangChu from '../components/TrangChu';
 
 class Home extends Component {
@@ -11,7 +11,7 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: ''
+      
     };
   }
 
@@ -37,13 +37,20 @@ class Home extends Component {
     this.props.history.push('/add')
   }
 
+  handleSubmit = (event) => {
+    event.preventDefault();
+
+  }
+
+  
   render() {
     const { value } = this.state // hiểu cái này k? đang định hỏi
     // cái này là cách viết khác của: const value = this.state.value
     // nhwng vieets kiểu này ngắn hơn, vì mình còn thêm đc vài thằng khác vô nữa
     //caí đó có biết nhưng sao lại là state mà thằng dưới là props
     //
-    var { abc } = this.props; // prop này là của redux
+
+    console.log(this.props.abc.state)
     return (
       <div className="App container">
         <header className="App-header">
@@ -69,18 +76,66 @@ class Home extends Component {
               </tr>
             </thead>
             <tbody>
-              {this.showMember(abc)}
+              {this.showMember()}
             </tbody>
           </table>
           <div onClick={() => this.onNavigateTopic()} style={{ marginLeft: 100, marginTop: 50 }}>Move to Topic</div>
         </header>
+
+
+        <div className="container">
+
+          {/* Trigger the modal with a button */}
+          {/* Modal */}
+          <div className="modal fade" id="myModal" role="dialog">
+            <div className="modal-dialog">
+              {/* Modal content*/}
+              <div className="modal-content">
+                <div className="modal-header">
+                  <button type="button" className="close" data-dismiss="modal">×</button>
+                  <h4 className="modal-title">Sửa Item</h4>
+                </div>
+                <div className="modal-body">
+                  <fieldset>
+                    <div className="form-group">
+                      <input className="form-control"  placeholder="id" name="id" type="text" onChange={this.HandleChange} required />
+                    </div>
+                    <div className="form-group">
+                      <input className="form-control"  placeholder="name" name="name" type="text" onChange={this.HandleChange} required />
+                    </div>
+                    <div className="form-group">
+                      <input className="form-control" placeholder="brithday" name="brithday" type="text" onChange={this.HandleChange} />
+                    </div>
+                    <div className="form-group">
+                      <input className="form-control" placeholder="sex" name="sex" type="text" onChange={this.HandleChange} />
+                    </div>
+                    <div className="form-group">
+                      <input className="form-control" placeholder="job" name="job" type="text" onChange={this.HandleChange} />
+                    </div>
+
+                  </fieldset>
+                </div>
+                <div className="modal-footer text-center">
+                  <button onClick={this.handleSubmit} className="btn btn-primary">submit</button>
+                  <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
       </div>
     );
+
+
   }
-  showMember(abc) {
+
+  showMember = () => {
     var result = null;
-    if (abc.length > 0) {
-      result = abc.map((abc, id) => {
+    // console.log(this.props.abc)
+    if (this.props.abc.length > 0) {
+      result = this.props.abc.map((abc, id) => {
         return <TrangChu
           key={id}
           abc={abc}
@@ -91,7 +146,6 @@ class Home extends Component {
   }
 
 }
-
 const mapStateToProps = state => {
   //hàm này là lấy dữ liệu từ store ra
   return {
@@ -101,14 +155,14 @@ const mapStateToProps = state => {
     // brithday: state.items.brithday,
     // job: state.items.job,
     // sex: state.items.sex,
-    abc: state.items
+    abc: state.items,
     //arrayTodo: tên đặt kiểu gì cũng đc, nên đặt có ý nghĩa
     //items: là items trong file index đợợc khai báo
     //todos: là biến todos trong initstate, cái mà mình gán lại khi xử lý reducer
   }
 }
 
-function mapDispatchToProps(dispatch,props) {
+function mapDispatchToProps(dispatch, props) {
   //hàm này là đẩy dữ liệu lêm store
   return {
     onUpdateItem: (id) => dispatch(updateItem(id))
