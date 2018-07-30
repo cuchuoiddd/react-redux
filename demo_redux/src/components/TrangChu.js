@@ -5,27 +5,27 @@ import { deleteItem,updateItem } from '../actions';
 class TrangChu extends Component {
 
     onDelete =()=>{
-        const id =this.props.abc.id;
+        const id =this.props.users.id;
         this.props.onDeleteItem(id);
         // console.log(id);
         
     }
     onUpdate =()=>{
-        const update =this.props.abc;
+        const update =this.props.users;
         this.props.onUpdateItem(update);
         
     }
     render() {
         
-        var { abc } = this.props;
+        var { users } = this.props;
         return (
             
             <tr>
-                <td>{abc.id}</td>
-                <td>{abc.name}</td>
-                <td>{abc.brithday}</td>
-                <td>{abc.sex}</td>
-                <td>{abc.job}</td>
+                <td>{users.id}</td>
+                <td>{users.name}</td>
+                <td>{users.brithday}</td>
+                <td>{users.sex}</td>
+                <td>{users.job}</td>
                 <td>
                     <button onClick={this.onUpdate} data-toggle="modal" data-target="#myModal"><span className='fa fa-pencil' ></span></button> &nbsp;
                     <button onClick={this.onDelete}><span className='fa fa-remove' ></span></button>

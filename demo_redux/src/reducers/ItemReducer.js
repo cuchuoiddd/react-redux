@@ -1,7 +1,8 @@
 // import _ from 'lodash';
-import { ADD_ITEM, UPDATE_ITEM, DELETE_ITEM } from '../actions/types';
+import { ADD_ITEM, UPDATE_ITEM, DELETE_ITEM,CHANGE_ITEM } from '../actions/types';
 
-const initialState = [
+const initialState = {
+  users:[
   {
     id: 1,
     todos: ['number 1', 'number 2'],
@@ -26,7 +27,8 @@ const initialState = [
     sex: 'Nam',
     job: 'làm ruộng'
   }
-];
+],
+user:{}};
 
 var s4 = () => {
   return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
@@ -44,28 +46,38 @@ const member = (state = initialState, action) => {
   switch (action.type) {
 
     case ADD_ITEM:
-      var newItem = {
-        id: randomID(),
-        name: action.itemName.name,
-        brithday: action.itemName.brithday,
-        sex: action.itemName.sex,
-        job: action.itemName.job
-      }
-      state.push(newItem);
-      console.log(action);
-      return [...state];
+    
+    var newItem = {
+      id: randomID(),
+      name: action.itemName.name,
+      brithday: action.itemName.brithday,
+      sex: action.itemName.sex,
+      job: action.itemName.job
+    }
+    state.users.push(newItem);
+      return {...state};
 
     case UPDATE_ITEM:
-      return {...state,state:action.update,...state}
+    // console.log(action.update);
+      return {...state,user:action.update}
     // case DELETE:
     //   return _.omit(state, action.payload);
+
+    case CHANGE_ITEM:
+    // console.log(action.changeUser);
+        return { ...state,users: state.users.map(item =>{
+            if(item.id === action.changeUser.id){
+                item = action.changeUser;
+            }
+            return item;
+        })}
 
     case DELETE_ITEM:
       // console.log(action.id);
       
-      state = state.filter(item => item.id !== action.id);
+      var users =[...state.users.filter(item => item.id !== action.id)];
       // console.log(state);
-      return [...state]
+      return {...state,users}
 
     
 

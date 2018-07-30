@@ -1,4 +1,4 @@
-import { ADD_ITEM, UPDATE_ITEM, DELETE_ITEM } from './types';
+import { ADD_ITEM, UPDATE_ITEM, DELETE_ITEM,CHANGE_ITEM } from './types';
 
 export function addItem(itemName) {
   return {
@@ -11,6 +11,13 @@ export function updateItem(update) {
   return {
     type: UPDATE_ITEM,
     update
+  }
+}
+
+export function changeItem(changeUser) {
+  return {
+    type: CHANGE_ITEM,
+    changeUser
   }
 }
 

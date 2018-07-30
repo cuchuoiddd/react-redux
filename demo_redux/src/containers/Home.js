@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 // import './App.css';
 // import { Provider } from 'react-redux';
 import { connect } from 'react-redux';
-import { updateItem } from '../actions'
+import { changeItem } from '../actions'
 import TrangChu from '../components/TrangChu';
 
 class Home extends Component {
@@ -39,7 +39,14 @@ class Home extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-
+    const changeUser = {
+      id: this.props.user.id,
+      name: this.refs.name.value,
+      brithday: this.refs.brithday.value,
+      sex: this.refs.sex.value,
+      job: this.refs.job.value
+    }
+    this.props.onUpdateItem(changeUser);
   }
 
   
@@ -49,8 +56,8 @@ class Home extends Component {
     // nhwng vieets kiểu này ngắn hơn, vì mình còn thêm đc vài thằng khác vô nữa
     //caí đó có biết nhưng sao lại là state mà thằng dưới là props
     //
-
-    console.log(this.props.abc.state)
+    if(this.props.user.state)
+      console.log(this.props.user.id)
     return (
       <div className="App container">
         <header className="App-header">
@@ -98,19 +105,16 @@ class Home extends Component {
                 <div className="modal-body">
                   <fieldset>
                     <div className="form-group">
-                      <input className="form-control"  placeholder="id" name="id" type="text" onChange={this.HandleChange} required />
+                      <input className="form-control" ref="name" defaultValue={this.props.user.name} placeholder="name" name="name" type="text" onChange={this.HandleChange} required />
                     </div>
                     <div className="form-group">
-                      <input className="form-control"  placeholder="name" name="name" type="text" onChange={this.HandleChange} required />
+                      <input className="form-control" ref="brithday" defaultValue={this.props.user.brithday} placeholder="brithday" name="brithday" type="text" onChange={this.HandleChange} />
                     </div>
                     <div className="form-group">
-                      <input className="form-control" placeholder="brithday" name="brithday" type="text" onChange={this.HandleChange} />
+                      <input className="form-control" ref="sex" defaultValue={this.props.user.sex} placeholder="sex" name="sex" type="text" onChange={this.HandleChange} />
                     </div>
                     <div className="form-group">
-                      <input className="form-control" placeholder="sex" name="sex" type="text" onChange={this.HandleChange} />
-                    </div>
-                    <div className="form-group">
-                      <input className="form-control" placeholder="job" name="job" type="text" onChange={this.HandleChange} />
+                      <input className="form-control" ref="job" defaultValue={this.props.user.job} placeholder="job" name="job" type="text" onChange={this.HandleChange} />
                     </div>
 
                   </fieldset>
@@ -133,12 +137,12 @@ class Home extends Component {
 
   showMember = () => {
     var result = null;
-    // console.log(this.props.abc)
-    if (this.props.abc.length > 0) {
-      result = this.props.abc.map((abc, id) => {
+    // console.log(this.props.users)
+    if (this.props.users.length > 0) {
+      result = this.props.users.map((users, id) => {
         return <TrangChu
           key={id}
-          abc={abc}
+          users={users}
         />
       });
     }
@@ -155,7 +159,8 @@ const mapStateToProps = state => {
     // brithday: state.items.brithday,
     // job: state.items.job,
     // sex: state.items.sex,
-    abc: state.items,
+    users: state.items.users,
+    user:state.items.user
     //arrayTodo: tên đặt kiểu gì cũng đc, nên đặt có ý nghĩa
     //items: là items trong file index đợợc khai báo
     //todos: là biến todos trong initstate, cái mà mình gán lại khi xử lý reducer
@@ -165,7 +170,7 @@ const mapStateToProps = state => {
 function mapDispatchToProps(dispatch, props) {
   //hàm này là đẩy dữ liệu lêm store
   return {
-    onUpdateItem: (id) => dispatch(updateItem(id))
+    onUpdateItem: (changeUser) => dispatch(changeItem(changeUser)),
     // là dispath gửi dữ liêu vào action để nó gửi vào reducer
     //cai person owr dau ra the
     // cais nay đặt tên gì cũng đơợc, kiểu như biến 1 function
