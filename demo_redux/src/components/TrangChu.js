@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import { deleteItem,updateItem } from '../actions';
-
 class TrangChu extends Component {
 
     onDelete =()=>{
@@ -13,6 +12,8 @@ class TrangChu extends Component {
     onUpdate =()=>{
         const update =this.props.users;
         this.props.onUpdateItem(update);
+        console.log(update);
+        
         
     }
     render() {

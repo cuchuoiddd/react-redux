@@ -8,15 +8,25 @@ import TrangChu from '../components/TrangChu';
 
 class Home extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      
-    };
+  state = {
+    name: "",
+    id: "",
+    birthday: "",
+    sex: '',
+    job: ''
+  }
+  componentWillReceiveProps(nextProps) {
+    if (this.props.user !== nextProps.user) this.setState({ ...nextProps.user });
   }
 
-  handleChange = (e) => {
-    this.setState({ value: e.target.value });
+
+  HandleChange = e => {
+    this.setState({ [e.target.name]: e.target.value })
+  }
+
+  handleSubmit = e => {
+    e.preventDefault();
+    this.props.onUpdateItem(this.state);
   }
 
   // handleKeyPress = e => {
@@ -37,17 +47,17 @@ class Home extends Component {
     this.props.history.push('/add')
   }
 
-  handleSubmit = (event) => {
-    event.preventDefault();
-    const changeUser = {
-      id: this.props.user.id,
-      name: this.refs.name.value,
-      brithday: this.refs.brithday.value,
-      sex: this.refs.sex.value,
-      job: this.refs.job.value
-    }
-    this.props.onUpdateItem(changeUser);
-  }
+  // handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   const changeUser = {
+  //     id: this.props.user.id,
+  //     name: this.refs.name.value,
+  //     brithday: this.refs.brithday.value,
+  //     sex: this.refs.sex.value,
+  //     job: this.refs.job.value
+  //   }
+  //   this.props.onUpdateItem(changeUser);
+  // }
 
   
   render() {
@@ -105,16 +115,16 @@ class Home extends Component {
                 <div className="modal-body">
                   <fieldset>
                     <div className="form-group">
-                      <input className="form-control" ref="name" defaultValue={this.props.user.name} placeholder="name" name="name" type="text" onChange={this.HandleChange} required />
+                      <input className="form-control"  value={this.state.name} placeholder="name" name="name" type="text" onChange={this.HandleChange} required />
                     </div>
                     <div className="form-group">
-                      <input className="form-control" ref="brithday" defaultValue={this.props.user.brithday} placeholder="brithday" name="brithday" type="text" onChange={this.HandleChange} />
+                      <input className="form-control"  value={this.state.brithday} placeholder="brithday" name="brithday" type="text" onChange={this.HandleChange} />
                     </div>
                     <div className="form-group">
-                      <input className="form-control" ref="sex" defaultValue={this.props.user.sex} placeholder="sex" name="sex" type="text" onChange={this.HandleChange} />
+                      <input className="form-control"  value={this.state.sex} placeholder="sex" name="sex" type="text" onChange={this.HandleChange} />
                     </div>
                     <div className="form-group">
-                      <input className="form-control" ref="job" defaultValue={this.props.user.job} placeholder="job" name="job" type="text" onChange={this.HandleChange} />
+                      <input className="form-control"  value={this.state.job} placeholder="job" name="job" type="text" onChange={this.HandleChange} />
                     </div>
 
                   </fieldset>
@@ -141,8 +151,8 @@ class Home extends Component {
     if (this.props.users.length > 0) {
       result = this.props.users.map((users, id) => {
         return <TrangChu
-          key={id}
-          users={users}
+          key   = {id}
+          users = {users}
         />
       });
     }
